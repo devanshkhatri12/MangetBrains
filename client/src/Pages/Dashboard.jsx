@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import TaskModal from '../components/TaskModal';
-import TaskCard from '../components/TaskCard';
+import TaskCard from '../components/Taskcard';
 import Pagination from '../components/Pagination';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
