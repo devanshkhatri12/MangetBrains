@@ -5,17 +5,19 @@ import TaskModal from '../components/TaskModal';
 import TaskCard from '../components/Taskcard';
 import Pagination from '../components/Pagination';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { useNavigate } from 'react-router-dom';
 
 const priorities = ['High','Medium','Low'];
 const colors = { High: 'bg-red-100', Medium: 'bg-amber-100', Low: 'bg-green-100' };
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, removeToken, setUser } = useContext(AuthContext);
   const [tasksByPriority, setTasksByPriority] = useState({ High: [], Medium: [], Low: [] });
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [editTask, setEditTask] = useState(null);
+  const navigate = useNavigate()
 
   async function loadTasks(p=1) {
     try {
@@ -61,6 +63,11 @@ export default function Dashboard() {
         <h1 className="text-2xl font-bold">Tasks</h1>
         <div className="flex items-center gap-3">
           <div>{user?.name} ({user?.role})</div>
+          <button onClick={()=>{
+            removeToken()
+            setUser()
+            navigate('/login')
+          }}className="px-4 py-2 bg-red-500 text-white rounded">LogOut</button>
           <button onClick={()=>setOpenModal(true)} className="px-4 py-2 bg-indigo-600 text-white rounded">New Task</button>
         </div>
       </header>

@@ -25,13 +25,15 @@ import Login from './Pages/Login.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
 import TaskDetails from './components/TaskDetails.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
+import Register from './Pages/Register.jsx';
 
 const App = () => {
   const { user } = useContext(AuthContext);
   return (
     <Routes>
+      <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />} />
-      <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+      <Route path="/" element={user ? <Dashboard /> : <Navigate to="/register" />} />
       <Route path="/task/:id" element={user ? <TaskDetails /> : <Navigate to="/login" />} />
     </Routes>
   );

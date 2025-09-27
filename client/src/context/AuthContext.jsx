@@ -14,8 +14,11 @@ export const AuthProvider = ({ children }) => {
 
   const setToken = (token) => {
     if (token) localStorage.setItem('token', token);
-    else localStorage.removeItem('token');
   };
 
-  return <AuthContext.Provider value={{ user, setUser, setToken }}>{children}</AuthContext.Provider>;
+  const removeToken = () => {
+    localStorage.removeItem('token')
+  }
+
+  return <AuthContext.Provider value={{ user, setUser, setToken, removeToken }}>{children}</AuthContext.Provider>;
 };
